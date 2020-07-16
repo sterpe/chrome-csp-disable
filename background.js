@@ -34,7 +34,8 @@ var onHeadersReceived = function (details) {
 
   for (var i = 0; i < details.responseHeaders.length; i++) {
     if (details.responseHeaders[i].name.toLowerCase() === 'content-security-policy') {
-      details.responseHeaders[i].value = '';
+      var csp = details.responseHeaders[i].value;
+      details.responseHeaders[i].value = csp.replace(/(script-src)/, '$1 http://localhost:8675 *.hivestreaming.com');
     }
   }
 
